@@ -1,0 +1,15 @@
+.buttons>.previous{
+    font-size: 40px;
+}
+.buttons>.next{
+    font-size: 40px;
+}
+.buttons>.button{
+
+    background-color: brown;
+}
+.slick-arrow{
+    font-family: "slick";
+    font-size: 40px;
+}
+
