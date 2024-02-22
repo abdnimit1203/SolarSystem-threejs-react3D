@@ -27,29 +27,29 @@ const SlickSlider1 = () => {
           sliderRef = slider;
         }}
       >
-        <div className="">
+        <div className="h-[600px]">
           <img
-            src="https://i.ibb.co/crndkJx/prope2.jpg"
+            src="https://static.wixstatic.com/media/c22c34_3e9ef9b088ae4c79be9abc677ece1ce5~mv2.gif"
             alt="image"
-            className="  object-cover  "
+            className="object-cover w-full h-full "
           />
         </div>
 
-        <div className="">
+        <div className="h-[600px]">
           <img
             src="https://i.ibb.co/crndkJx/prope2.jpg"
             alt="image"
             className="  object-cover  "
           />
         </div>
-        <div className="">
+        <div className="h-[600px]">
           <img
             src="https://i.ibb.co/crndkJx/prope2.jpg"
             alt="image"
             className="  object-cover  "
           />
         </div>
-        <div className="">
+        <div className="h-[600px]">
           <img
             src="https://i.ibb.co/crndkJx/prope2.jpg"
             alt="image"
@@ -58,7 +58,7 @@ const SlickSlider1 = () => {
         </div>
       </Slider>
       <div className=" absolute top-10 text-white p-10 pr-[50%]  flex justify-center flex-col h-full z-10 gap-6">
-        <h2 className="text-4xl">Arizona</h2>
+        <h2 className="text-4xl font-semibold">NEBULA</h2>
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus
           officia,

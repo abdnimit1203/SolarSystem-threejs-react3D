@@ -1,65 +1,52 @@
-import React, { useRef } from "react";
-import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
+import React, { useState, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-// import { useDrag } from "react-use-gesture";
-// import { useSpring, a } from "react-spring";
-// import FurnitureChair from "../components/Extra/FurnitureChair";
-// import Chair3D from "../components/Extra/Chair3D";
-// const Furniture = ({ position }) => {
-//   const gltf = useGLTF("/kitchen.gltf", true);
-//   const group = useRef();
+import Chair from "../components/Page3D/3DComponents/Chair";
+import Room from "../components/Page3D/3DComponents/Room";
 
- 
+const MyScene = () => {
+  const chairRef = useRef();
+  const roomRef = useRef();
 
-  
+  const [dragging, setDragging] = useState(false);
+  const [roomRotation, setRoomRotation] = useState(true);
+  console.log(dragging);
 
-//   return (
- 
-//       <primitive object={gltf.scene} />
+  const rotateChair = () => {
+    setRoomRotation(!roomRotation)
+    console.log("Stopped")
+  };
 
-//   );
-// };
-
-
-
-
-const Wardrobe = ({ position }) => {
-  const gltf = useGLTF("/kitchen.gltf", true);
-  const group = useRef();
-
- 
-
-  
+  const rotateRoom = () => {
+    if (roomRef.current) {
+      roomRef.current.rotation.y += Math.PI / 2; // Rotate the room by 90 degrees around the y-axis
+    }
+  };
 
   return (
- 
-      <primitive object={gltf.scene} />
-
-  );
-};
-
-const FurnitureRoom = () => {
-  return (
-    <Canvas style={{ height: "100vh" }} className="bg-blue-900">
-      <PerspectiveCamera makeDefault position={[0, 5, 10]} />
-      <Suspense fallback={null}>
-        <OrbitControls enableRotate={true} enableZoom={true}/>
-        <ambientLight intensity={0.9} />
+    <div className="py-10 min-h-screen bg-lime-100">
       
-        <RoomModel position={[0,0,0]}/>
-        {/* <FurnitureChair/> */}
-        {/* <Wardrobe position={[0, 0, 0]} /> */}
-        {/* <Chair3D/> */}
-      </Suspense>
-    </Canvas>
+      <button className={`btn mt-20 mr-3 text-white font-semibold ${roomRotation? "btn-success" : "btn-error"}`} onClick={rotateChair}>
+        {
+          roomRotation?"Room Rotation: Enabled":"Room Rotation: Disabled "
+        }
+        
+      </button>
+      <button className="btn mt-20 btn-accent" onClick={rotateRoom}>
+        Rotate Room 90 degree
+      </button>
+      <Canvas style={{ height: "100vh" }}>
+        <PerspectiveCamera makeDefault position={[0, 5, 10]} />
+        <OrbitControls enableRotate={roomRotation} />
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <Room  ref={roomRef}>
+          <Chair ref={chairRef} />
+        </Room>
+      </Canvas>
+    </div>
   );
 };
 
-const RoomModel = () => {
-  const gltf = useGLTF("/kitchen.gltf", true);
-  return <primitive object={gltf.scene} rotation={[0, 3.2, 0]} />;
-};
-
-export default FurnitureRoom;
+export default MyScene;
